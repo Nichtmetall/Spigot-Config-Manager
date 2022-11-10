@@ -1,0 +1,5 @@
+name: Spigot Config Manager
+version: '${project.version}'
+main: de.nichti.spigotconfigmanager.Plugin
+api-version: 1.19
+authors: [ Nichtmetall ]

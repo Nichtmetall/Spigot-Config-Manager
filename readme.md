@@ -1,0 +1,1 @@
+# Spigot-Config-Manager
