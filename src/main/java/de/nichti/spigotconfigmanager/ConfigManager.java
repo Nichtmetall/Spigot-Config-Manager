@@ -28,18 +28,23 @@ public abstract class ConfigManager {
         return this.config;
     }
 
-    protected void registerDefaultConfig(FileConfiguration defaultConfig){
-        this.defaultConfig = defaultConfig;
+    protected void registerDefaultConfig(FileConfiguration defaultConfig){ this.defaultConfig = defaultConfig; }
 
+    protected Boolean saveDefaultConfig(){
+        if(defaultConfig.saveToString().length() > 0){
+            this.config = this.defaultConfig;
+            return saveData();
+        }
+        else return false;
     }
 
-    protected void setDefaultConfig(){
-        this.config = defaultConfig;
-    }
-
-    public void resetConfig(){
-        setDefaultConfig();
+    protected void overwriteConfig(FileConfiguration newConfig){
+        this.config = newConfig;
         saveData();
+    }
+
+    public void resetToDefaultConfig(){
+        saveDefaultConfig();
     }
 
     protected FileConfiguration loadConfig(String configName) {
@@ -125,14 +130,7 @@ public abstract class ConfigManager {
     }
 
     public Location getLocation(String path){
-        String worldName = getString(String.format("%s.world", path));
-        World world = Bukkit.getWorld(worldName);
-
-        int x = getInt(String.format("%s.x", path));
-        int y = getInt(String.format("%s.y", path));
-        int z = getInt(String.format("%s.z", path));
-
-        return new Location(world, x, y, z);
+        return new Location(Bukkit.getWorld(getString(String.format("%s.world", path))), getInt(String.format("%s.x", path)), getInt(String.format("%s.y", path)), getInt(String.format("%s.z", path)));
     }
 
     public Boolean isEmpty(){
