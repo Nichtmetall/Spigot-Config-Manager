@@ -12,7 +12,7 @@ Add code below to your `pom.xml` file
   <version>1.0-SNAPSHOT</version>
 </dependency>
 ```
-run via command line
+Than run the command below via your command line
 ```
 nvm install
 ```
